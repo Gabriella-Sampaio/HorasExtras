@@ -1,39 +1,19 @@
 ﻿Console.Clear();
 
-decimal salarioMensal, horasDiaria, horasTrabalhadas;
+decimal salarioMensal,
+horasDiaria,
+horasTrabalhadas,
+ValorTotalHrExtra;
 const decimal acrescimoHrExtra = 1.4m;
 
-Console.WriteLine("Bem vindo, aqui você calcula suas horas extra do dia");
+Console.WriteLine("Bem vindo, aqui você calcula suas horas extra do dia\n");
 
 salarioMensal = ValorDigitado("Qual seu salário mensal bruto?: ");
 horasDiaria = ValorDigitado("Quantas horas você trabalha por dia?: ");
 horasTrabalhadas = ValorDigitado("Quantas horas você trabalhou hoje? (incluindo horas extra): ");
 
-decimal salarioHoraBase = salarioMensal / 30 / horasDiaria;
-decimal horasExtra = horasTrabalhadas - horasDiaria;
-decimal Total = salarioHoraBase * acrescimoHrExtra * horasExtra;
-
-Console.WriteLine($"{Total:C}");
-/*
-Fórmula
-
-Valores solicitados
-
-decimal salarioMensal - ganha por mês
-double horasDiaria - quanto vc trabalha por dia
-double horasTotalDia - quanto vc trabalhou no dia
-
-decimal salárioHoraBase = (salarioMensal / 30) / horasTrabDiaria
-
-horasExtra = horasTotalDia - horasDiaria  // pega quanto a pessoa trabalhou - o q normalmente trabalharia
-
-Total =  (salárioHoraBase * 1,4) * horasExtra
-
-
-*/
-
-
-
+ValorTotalHrExtra = ValorTotal(salarioMensal, horasDiaria, horasTrabalhadas);
+Console.WriteLine($"\nVocê tem {ValorTotalHrExtra:C} para receber deste dia referente às horas extra\n");
 
 
 decimal ValorDigitado (string mensagem)
@@ -46,4 +26,16 @@ decimal ValorDigitado (string mensagem)
         Console.Write(mensagem);
     }
     return vlDig;
+}
+
+decimal ValorTotal(decimal salMens, decimal hrDir, decimal hrTrab)
+{
+    decimal salarioHoraBase,
+    horasExtra,
+    Total;
+
+    salarioHoraBase = salMens / 30 / hrDir;
+    horasExtra = hrTrab - hrDir;
+    Total = salarioHoraBase * acrescimoHrExtra * horasExtra;
+    return Total;
 }
